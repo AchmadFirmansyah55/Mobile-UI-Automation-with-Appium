@@ -27,7 +27,7 @@ describe('Add product test', function(){
         await detailProduct.clickAddCartButton();
         await detailProduct.expectCartIconCount(1);
         await detailProduct.clickCartIcon();
-        await cart.expectProductQuantityToBe('Sauce Labs Backpack',1);
+        await cart.expectProductInCartToBe('Sauce Labs Backpack',1);
     })
 
     it('Should multiple quantity in one product', async function(){
@@ -37,7 +37,7 @@ describe('Add product test', function(){
         await detailProduct.clickAddCartButton();
         await detailProduct.expectCartIconCount(3);
         await detailProduct.clickCartIcon();
-        await cart.expectProductQuantityToBe('Sauce Labs Backpack',3);
+        await cart.expectProductInCartToBe('Sauce Labs Backpack',3);
     })
 
     it('Should decrease item quantity in detail product', async function(){
@@ -48,7 +48,7 @@ describe('Add product test', function(){
         await detailProduct.clickAddCartButton();
         await detailProduct.expectCartIconCount(2);
         await detailProduct.clickCartIcon();
-        await cart.expectProductQuantityToBe('Sauce Labs Backpack',2);
+        await cart.expectProductInCartToBe('Sauce Labs Backpack',2);
     })
 
     it('Should add multiple products', async function(){
@@ -56,17 +56,19 @@ describe('Add product test', function(){
         await detailProduct.clickAddCartButton();
         await driver.back();
         await catalogProduct.selectProduct('Sauce Labs Backpack (orange)');
+        await detailProduct.clickPlusQuantity();
         await detailProduct.clickAddCartButton();
         await detailProduct.expectCartIconCount(2);
         await detailProduct.clickCartIcon();
-        await cart.expectProductQuantityToBe('Sauce Labs Backpack',1);
-        await cart.expectProductQuantityToBe('Sauce Labs Backpack (orange)',1);
+        await cart.expectProductInCartToBe('Sauce Labs Backpack',1);
+        await cart.expectSecondProductToBe('Sauce Labs Backpack (orange)',1);
     })
 
     it('Should not add product with zero quantity',async function(){
         await catalogProduct.selectProduct('Sauce Labs Backpack');
         await detailProduct.clickMinusQuantity(1);
         await detailProduct.expectItemQuantity(0);
+        await detailProduct.expectAddCartButtonDissabled();
         await detailProduct.clickAddCartButton();
         await detailProduct.clickCartIcon();
         await cart.expectEmptyCart();

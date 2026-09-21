@@ -55,6 +55,12 @@ class DetailProductPage {
         let cartIcon = await $(CATALOG_PRODUCT_LOCATORS.selectors.cartQuantity);
         await expect(cartIcon).toBeDisplayed();
     }
+
+    async expectAddCartButtonDissabled(){
+        let addCartButton = await $(DETAIL_PRODUCT_LOCATORS.selectors.addProductButton);
+        let addCardEnabled = await addCartButton.getAttribute('enabled');
+        await expect(addCardEnabled).toBe("false");
+    }
 }
 
 module.exports = DetailProductPage;

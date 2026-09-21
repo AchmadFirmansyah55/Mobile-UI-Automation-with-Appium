@@ -32,5 +32,11 @@ class CatalogProductPage {
         `/android.widget.ImageView[@content-desc="Product Image"]`);
         await productImage.click();
     }
+
+    async scrollProduct(productName){
+        const productTitle = await $(`android=new UiScrollable(new UiSelector().scrollable(true))` + 
+            `.scrollIntoView(new UiSelector().text("${productName}"))`);
+        await expect(productTitle).toBeDisplayed();
+    }
 }
 module.exports = CatalogProductPage;    

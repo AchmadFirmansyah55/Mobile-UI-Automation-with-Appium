@@ -24,20 +24,28 @@ class CartPage{
         await expect(totalPrice).toBeDisplayed();
     }
 
-    async expectProductQuantityToBe(productName, expectedQuantity){
-        const productTitle = await $(`android=new UiScrollable(new UiSelector().scrollable(true))` + `.scrollIntoView(new UiSelector().text("${productName}"))`);
-        await expect(productTitle).toBeDisplayed();
+    async expectProductInCartToBe(productName, expectedQuantity){
+        let parentWithName = await $(`//androidx.recyclerview.widget.RecyclerView[@content-desc="Displays list of selected products"]` + 
+            `/android.view.ViewGroup[.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/titleTV" and @text="${productName}"]]`);
 
-        await driver.execute('mobile: scroll', {
-            direction: 'up'
-        });
+        let quantityElement = await parentWithName.$(`.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV"]`);
 
-        let productAdded = await $(`//androidx.recyclerview.widget.RecyclerView[@content-desc="Displays list of selected products"]` + 
-            `/android.view.ViewGroup[.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/titleTV" and @text="${productName}"]]` + 
-            `//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV" and @text="${expectedQuantity}"]`);
-        let itemQuantityText = await productAdded.getAttribute('text');
-        let itemQuantityValue = Number(itemQuantityText);
-        await expect(itemQuantityValue).toBe(expectedQuantity);
+        let quantityText = await quantityElement.getAttribute('text');
+        let quantityValue = Number(await quantityText);
+        await expect(quantityValue).toBe(expectedQuantity);
+    }
+
+    async expectSecondProductToBe(productName, expectedQuantity){
+        await $(`android=new UiScrollable(new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/scrollView")).scrollForward()`);
+        
+        let parentWithName = await $(`//androidx.recyclerview.widget.RecyclerView[@content-desc="Displays list of selected products"]` + 
+            `/android.view.ViewGroup[.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/titleTV" and @text="${productName}"]]`);
+
+        let quantityElement = await parentWithName.$(`.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV"]`);
+
+        let quantityText = await quantityElement.getAttribute('text');
+        let quantityValue = Number(await quantityText);
+        await expect(quantityValue).toBe(expectedQuantity);
     }
 
     async expectEmptyCart(){
