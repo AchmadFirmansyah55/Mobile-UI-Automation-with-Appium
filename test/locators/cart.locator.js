@@ -4,7 +4,8 @@ const CART_LOCATORS = {
         checkoutButton : '~Confirms products for checkout',
         totalText : '//android.widget.TextView[@text="Total:"]',
         totalPrice : 'id=com.saucelabs.mydemoapp.android:id/totalPriceTV',
-        totalItem : 'id=com.saucelabs.mydemoapp.android:id/itemsTV'
+        totalItem : 'id=com.saucelabs.mydemoapp.android:id/itemsTV',
+        noItem : 'id=com.saucelabs.mydemoapp.android:id/noItemTitleTV'
     }
 }
 

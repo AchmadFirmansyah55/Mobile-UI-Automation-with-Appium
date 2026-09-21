@@ -51,15 +51,24 @@ describe('Add product test', function(){
         await cart.expectProductQuantityToBe('Sauce Labs Backpack',2);
     })
 
-    it('Should add the same product with different colours', async function(){
+    it('Should add multiple products', async function(){
         await catalogProduct.selectProduct('Sauce Labs Backpack');
-        await detailProduct.pickColor('Blue');
         await detailProduct.clickAddCartButton();
-        await detailProduct.pickColor('Green');
+        await driver.back();
+        await catalogProduct.selectProduct('Sauce Labs Backpack (orange)');
         await detailProduct.clickAddCartButton();
         await detailProduct.expectCartIconCount(2);
         await detailProduct.clickCartIcon();
+        await cart.expectProductQuantityToBe('Sauce Labs Backpack',1);
+        await cart.expectProductQuantityToBe('Sauce Labs Backpack (orange)',1);
     })
-    
 
+    it('Should not add product with zero quantity',async function(){
+        await catalogProduct.selectProduct('Sauce Labs Backpack');
+        await detailProduct.clickMinusQuantity(1);
+        await detailProduct.expectItemQuantity(0);
+        await detailProduct.clickAddCartButton();
+        await detailProduct.clickCartIcon();
+        await cart.expectEmptyCart();
+    })
 })

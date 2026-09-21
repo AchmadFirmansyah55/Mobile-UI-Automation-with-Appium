@@ -25,32 +25,24 @@ class CartPage{
     }
 
     async expectProductQuantityToBe(productName, expectedQuantity){
+        const productTitle = await $(`android=new UiScrollable(new UiSelector().scrollable(true))` + `.scrollIntoView(new UiSelector().text("${productName}"))`);
+        await expect(productTitle).toBeDisplayed();
+
+        await driver.execute('mobile: scroll', {
+            direction: 'up'
+        });
+
         let productAdded = await $(`//androidx.recyclerview.widget.RecyclerView[@content-desc="Displays list of selected products"]` + 
             `/android.view.ViewGroup[.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/titleTV" and @text="${productName}"]]` + 
-            `//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV"]`);
+            `//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV" and @text="${expectedQuantity}"]`);
         let itemQuantityText = await productAdded.getAttribute('text');
         let itemQuantityValue = Number(itemQuantityText);
         await expect(itemQuantityValue).toBe(expectedQuantity);
     }
 
-    async expectProductColorBlue(productName, expectedQuantity){
-        let parent = await $(`//androidx.recyclerview.widget.RecyclerView[@content-desc="Displays list of selected products"]` +
-            `/android.view.ViewGroup[.//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/titleTV" and @text="${productName}"]]`);
-        let blueColor = await parent.$(`.//android.widget.ImageView[@content-desc="Displays color of selected product"][1]`);
-        let quantity = await parent.$(`//android.widget.TextView[@resource-id="com.saucelabs.mydemoapp.android:id/noTV" and @text="${expectedQuantity}"]`);
-        
-        let itemName = await parent.getAttribute('text');
-        let itemQuantityText = await quantity.getAttribute('text');
-        let itemQuantityValue = Number(itemQuantityText);
-
-        await expect(itemName).toBe(productName);
-        await expect(blueColor).toBeDisplayed();
-        await expect(itemQuantityValue).toBe(expectedQuantity);
+    async expectEmptyCart(){
+        let noItem = await $(CART_LOCATORS.selectors.noItem);
+        await expect(noItem).toHaveText('No Items');
     }
-
-    async expectProductColorGreen(productName, expectedQuantity){
-        let productAdded =
-    }
-
 }
 module.exports = CartPage;
