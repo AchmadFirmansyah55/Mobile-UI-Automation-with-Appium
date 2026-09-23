@@ -1,6 +1,7 @@
 const CATALOG_PRODUCT_LOCATORS = require('../locators/catalog.product.locator');
 const DETAIL_PRODUCT_LOCATORS = require('../locators/detail.product.locator');
 
+
 class DetailProductPage {
     async clickCartIcon(){
         let cartIcon = $(DETAIL_PRODUCT_LOCATORS.selectors.cartIcon);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx wdio run wdio.conf.js",
-     "allure:generate": "allure generate allure-results --clean",
+    "allure:generate": "allure generate allure-results --clean",
     "allure:open": "allure open allure-report",
     "allure": "allure generate allure-results --clean && allure open allure-report"
   },
@@ -23,5 +23,8 @@
     "appium-uiautomator2-driver": "^4.2.9",
     "expect-webdriverio": "^6.0.9",
     "webdriverio": "^9.30.1"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
   }
 }
