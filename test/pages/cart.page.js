@@ -45,8 +45,6 @@ class CartPage{
         await expect(itemQuantityValue).toBe(expectedQuantity);
     }
 
-    
-
     async expectEmptyCart(){
         let noItem = await $(CART_LOCATORS.selectors.noItem);
         await expect(noItem).toHaveText('No Items');

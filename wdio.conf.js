@@ -5,7 +5,7 @@ exports.config = {
     port: 4723,
     path: '/',
 
-    specs: ['./test/specs/add.product.specs.js'],
+    specs: ['./test/specs/checkout.specs.js'],
 
     maxInstances: 1,
 

@@ -84,31 +84,31 @@ class CheckoutPaymentPage{
         await countryElement.setValue(country);
     }
 
-    async expectFillFullNameField(){
+    async expectFillBillingNameField(){
         let emptyFullName = await $(CHECKOUT_PAYMENT_LOCATORS.selectors.emptyFullName);
         await expect(emptyFullName).toHaveText('Please provide your full name.');
         await expect(emptyFullName).toBeDisplayed();
     }
 
-    async expectFillAddressField(){
+    async expectFillBillingAddressField(){
         let emptyAddress = await $(CHECKOUT_PAYMENT_LOCATORS.selectors.emptyAddress);
         await expect(emptyAddress).toHaveText('Please provide your address.');
         await expect(emptyAddress).toBeDisplayed();
     }
 
-    async expectFillCityField(){
+    async expectFillBillingCityField(){
         let emptyCity = await $(CHECKOUT_PAYMENT_LOCATORS.selectors.emptyCity);
         await expect(emptyCity).toHaveText('Please provide your city.');
         await expect(emptyCity).toBeDisplayed();
     }
 
-    async expectZipCodeField(){
+    async expectBillingZipCodeField(){
         let emptyZipCode = await $(CHECKOUT_PAYMENT_LOCATORS.selectors.emptyZipCode);
         await expect(emptyZipCode).toHaveText('Please provide your zip');
         await expect(emptyZipCode).toBeDisplayed();
     }
 
-    async expectCountryField(){
+    async expectBillingCountryField(){
         let emptyCountry = await $(CHECKOUT_PAYMENT_LOCATORS.selectors.emptyCountry);
         await expect(emptyCountry).toHaveText('Please provide your country');
         await expect(emptyCountry).toBeDisplayed();
