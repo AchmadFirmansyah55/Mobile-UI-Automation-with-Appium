@@ -7,6 +7,7 @@ const CHECKOUT_PAYMENT_LOCATORS = {
         securityCode : 'id=com.saucelabs.mydemoapp.android:id/securityCodeET',
         checkBoxBillingAddress : 'id=com.saucelabs.mydemoapp.android:id/billingAddressCB',
         emptyName :'id=com.saucelabs.mydemoapp.android:id/nameErrorTV',
+        cardNumberErrorSign : 'id=com.saucelabs.mydemoapp.android:id/cardNumberErrorIV',
         emptyExpirationDate :'id=com.saucelabs.mydemoapp.android:id/expirationDateErrorTV',
         emptySecurityCode :'id=com.saucelabs.mydemoapp.android:id/securityCodeErrorTV',
         fullname : 'id=com.saucelabs.mydemoapp.android:id/fullNameET',

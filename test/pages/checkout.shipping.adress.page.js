@@ -59,14 +59,16 @@ class CheckoutShippingAddressPage {
         await expect(emptyCity).toBeDisplayed();
     }
 
-    async expectZipCodeField(){
+    async expectFillZipCodeField(){
         let emptyZipCode = await $(CHECKOUT_SHIPPING_ADDRESS_LOCATORS.selectors.emptyZipCode);
         await expect(emptyZipCode).toHaveText('Please provide your zip');
         await expect(emptyZipCode).toBeDisplayed();
     }
 
-    async expectCountryField(){
+    async expectFillCountryField(){
         let emptyCountry = await $(CHECKOUT_SHIPPING_ADDRESS_LOCATORS.selectors.emptyCountry);
+        let errorText = await emptyCountry.getText();
+        console.log('Country error:', errorText);
         await expect(emptyCountry).toHaveText('Please provide your country');
         await expect(emptyCountry).toBeDisplayed();
     }
@@ -77,6 +79,13 @@ class CheckoutShippingAddressPage {
             {
                 message: 'FAIL: Zip Code must contain numbers only'
             }
-        )}
+        );
+    }
+    
+    async expectPage(){
+        let title = await $(CHECKOUT_SHIPPING_ADDRESS_LOCATORS.selectors.title);
+        await expect(title).toBeDisplayed();
+    }
+    
 }
 module.exports=CheckoutShippingAddressPage;

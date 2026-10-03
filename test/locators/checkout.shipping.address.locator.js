@@ -1,5 +1,6 @@
 const CHECKOUT_SHIPPING_ADRESS_LOCATORS = {
     selectors:{
+        title : 'id=com.saucelabs.mydemoapp.android:id/enterShippingAddressTV',
         fullname : 'id=com.saucelabs.mydemoapp.android:id/fullNameET',
         address1 : 'id=com.saucelabs.mydemoapp.android:id/address1ET',
         address2 : 'id=com.saucelabs.mydemoapp.android:id/address2ET',

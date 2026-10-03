@@ -1,7 +1,7 @@
 const CHECKOUT_REVIEW_LOCATORS = require('../locators/checkout.review.locator');
 
 class CheckoutReviewPage {
-    async expectToCheckoutReviewPage(){
+    async expectPage(){
         let title = await $(CHECKOUT_REVIEW_LOCATORS.selectors.title);
         await expect(title).toBeDisplayed();
         await expect(title).toHaveText('Review your order');
